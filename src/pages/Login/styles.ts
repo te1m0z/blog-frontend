@@ -6,7 +6,6 @@ export const Form = styled.form`
   row-gap: 20px;
   max-width: 300px;
   margin: 0 auto;
-  margin-top: 150px;
 `
 
 export const Title = styled.div`

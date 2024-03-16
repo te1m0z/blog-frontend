@@ -44,16 +44,6 @@ export const GlobalStyles = createGlobalStyle`
 		object-fit: cover;
 	}
 
-	.icon {
-		display: block;
-		margin: 0;
-		padding: 0;
-		pointer-events: none;
-		touch-action: none;
-		fill: var(--fill-color, currentColor);
-		stroke: var(--stroke-color, transparent);
-	}
-
 	.block-title {
 		display: inline-block;
 		font-family: ${THEME.FONT_FAMILIES.oxanium};

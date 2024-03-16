@@ -17,7 +17,7 @@ export default function AppHeader() {
                     <S.MenuBlock>
                         <ul>
                             <li>
-                                <NavLink to="/blog">Blog</NavLink>
+                                <NavLink to="/notes">Notes</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/portfolio">Portfolio</NavLink>

@@ -1,24 +1,22 @@
-import cn from "classnames";
+import * as S from './styles'
 
 interface IProps {
   name: string;
   size?: string | number;
   width?: string | number;
   height?: string | number;
-  className?: string;
 }
 
 export default function Icon(props: IProps) {
-  const { name, size, width, height, className } = props;
+  const { name, size, width, height } = props;
 
   return (
-    <svg
+    <S.Svg
       width={size || width || "100%"}
       height={size || height || "100%"}
-      className={cn("icon", `icon-${name}`, className)}
     >
       <use href={`/sprite.svg#${name}`} />
-    </svg>
+    </S.Svg>
   );
 }
 

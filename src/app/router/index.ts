@@ -9,8 +9,6 @@ export const routesNames = {
     Admin: 'Admin'
 }
 
-// type RouteName = typeof routesNames[keyof typeof routesNames]
-
 const routes: RouteObject[] = [
     {
         path: '/',
@@ -21,8 +19,8 @@ const routes: RouteObject[] = [
                 Component: HomePage
             },
             {
-                path: 'blog',
-                lazy: () => import('@/pages/Blog')
+                path: 'notes',
+                lazy: () => import('@/pages/Notes')
             },
             {
                 path: 'login',

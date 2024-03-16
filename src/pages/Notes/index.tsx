@@ -18,4 +18,4 @@ export function Component() {
     )
 }
 
-Component.displayName = 'BlogPage'
+Component.displayName = 'NotesPage'

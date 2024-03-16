@@ -9,13 +9,13 @@ import { store } from '@/app/store'
 import AppStyles from '@/app/styles'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ReduxProvider store={store}>
       <AppThemeProvider>
         <AppStyles />
         <RouterProvider router={router} />
-        <Toaster />
+        <Toaster position='top-right' />
       </AppThemeProvider>
     </ReduxProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

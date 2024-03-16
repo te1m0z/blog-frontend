@@ -38,7 +38,7 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: '',
-                lazy: () => import('@/pages/Login')
+                lazy: () => import('@/pages/Admin')
             }
         ]
     }

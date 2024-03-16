@@ -5,6 +5,8 @@ export * as THEME from './constants/theme'
 export * from './helpers/storage'
 
 /* TYPES */
+export * from './types/Note'
+export * from './types/User'
 export type { TAppTheme, TBreakpoint } from './types/Theme'
 export type { TAppLocalStorage } from './types/Storage'
 

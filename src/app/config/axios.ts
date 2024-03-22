@@ -6,7 +6,8 @@ export const http = axios.create({
     baseURL: import.meta.env.VITE_API_DOMAIN,
     withCredentials: false,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Timezone': 'Asia/Batumi'
     },
     responseType: 'json',
     timeout: parseInt(import.meta.env.VITE_API_TIMEOUT)

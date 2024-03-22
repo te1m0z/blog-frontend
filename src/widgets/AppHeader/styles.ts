@@ -8,7 +8,7 @@ export const Header = styled.header`
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: ${THEME.BG_COLOR};
+  /* background-color: ${THEME.BG_COLOR}; */
   transition: background-color 300ms ease;
 `
 

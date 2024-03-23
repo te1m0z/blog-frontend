@@ -35,8 +35,8 @@ http.interceptors.response.use((response) => {
         toast.error('API Error :(')
     }
 
-    if (error.response?.statusText === 'Unauthorized') {
-        toast.error('Authorization error')
+    if (error.response?.status === 403) {
+        toast.error('Вам запрещено обращаться по этому URL')
     }
 
     // ???

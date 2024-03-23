@@ -47,33 +47,23 @@ export const signin = createAsyncThunk(
  * JWT
  */
 
-// login(params) => 
+type TUserSliceResponse = true | Record<string, string>
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        login(state, action: PayloadAction<IUserLoginParams>) {
-            api.loginWithPassword(action.payload)
-            toast.error('wrong')
-            // { errors: [], response: { id: 1,login: 2 } }
+        login: async (state, action: PayloadAction<IUserLoginParams>) => {
+            const { response, error } = await api.loginWithPassword(action.payload)
+
+            if (response) {
+                state.isAuth = true
+                state.user = response
+            }
+
+            return error
         }
-    },
-    // extraReducers(builder) {
-    //     builder
-    //         .addCase(signin.pending, (state) => {
-    //             state.isLoading = true
-    //         })
-    //         .addCase(signin.fulfilled, (state, action) => {
-    //             state.isLoading = false
-    //             // запись данных
-    //             console.log(state, action)
-    //         })
-    //         .addCase(signin.rejected, (state) => {
-    //             state.errorText = 'Wrong login or pass'
-    //             // state.isLoading
-    //         })
-    // },
+    }
 })
 
 export const { login } = userSlice.actions

@@ -9,7 +9,7 @@ export default function HomePage() {
 
     // const userSelector = useSelector('user')
 
-    store.dispatch(userSlice.actions.login({ login: 'da', password: 'da', csrf: 'c880d810-244b-43d8-8511-18f159e56892' }))
+    store.dispatch(userSlice.actions.login({ login: 'da', password: 'da', csrf: 'e5fc7015-56f1-4546-8e15-6517e4f07e02' }))
     
     // login({ login: 'da', password: 'da', csrf: '123' })
 

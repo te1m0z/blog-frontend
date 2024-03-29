@@ -1,49 +1,32 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
+import { makeObservable, observable, action } from "mobx"
 import type { IUser } from '@/shared'
 import type { IUserLoginParams } from './types'
-import { http } from '@/app/config/axios'
 import * as api from './api'
 
-interface IUserSliceState {
-    user: IUser | null
-    accessToken: string | null
-    isAuth: boolean
-}
+class User {
+    user: IUser | null = null
+    accessToken: string | null = null
+    isAuth: boolean = false
 
-// interface IUserSliceReducers {
-//     login(payload: { login: string, password: string, csrf: string }): Promise<number>
-// }
-
-const initialState: IUserSliceState = {
-    user: null,
-    accessToken: null,
-    isAuth: false
-}
-
-export const loginWithPassword = createAsyncThunk(
-    'user/loginWithPassword',
-    async function(payload: IUserLoginParams) {
-        const { response, error } = await api.loginWithPassword(payload)
-    },
-)
-
-export const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {
-        login: async (state, action: PayloadAction<IUserLoginParams>) => {
-            const { response, error } = await api.loginWithPassword(action.payload)
-
-            if (response) {
-                state.isAuth = true
-                state.user = response
-            }
-
-            // return error
-        }
+    constructor() {
+        makeObservable(this, {
+            user: observable,
+            accessToken: observable,
+            isAuth: action
+        })
     }
-})
 
-// export const { login } = userSlice.actions
+    async login(payload: IUserLoginParams) {
+        const { response, error } = await api.loginWithPassword(payload)
 
-export default userSlice.reducer
+        if (response) {
+            this.isAuth = true
+            this.user = response
+            
+            return true
+        }
+
+        return error
+    }
+}
+  

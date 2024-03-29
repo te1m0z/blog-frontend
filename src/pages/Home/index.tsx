@@ -3,7 +3,7 @@ import WorkSection from './ui/WorkSection'
 import * as S from './styles'
 import { login, userSlice }  from '@/app/store/user'
 // import { useSelector } from 'react-redux'
-import { store } from '@/app/store/index'
+import { store } from '@/app/store/___index'
 
 export default function HomePage() {
 

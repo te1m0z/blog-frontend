@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from 'styled-components'
-import AppHeader from "@/widgets/AppHeader";
+import { AppHeader } from "@/widgets/AppHeader";
 
 const Main = styled.main`
   flex-grow: 1;

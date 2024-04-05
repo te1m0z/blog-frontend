@@ -1,20 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { type ChangeEvent, type FormEvent } from 'react'
 import { InputText, Button } from '@/shared'
+import { UserContext } from '@/app/contexts/user'
 import * as S from './styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '@/app/store/user'
-// import { useUserStore } from '@/app/store/user'
 
 export function Component() {
-//   const userStore = useUserStore()
-//   const [csrf, setCsrf] = useState('')
-  const dispatch = useDispatch()
+  const userStore = useContext(UserContext)
 
-  const errorText = useSelector((state) => state.user.errorText)
-
+  const [csrf, setCsrf] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    async function fetchCsrfToken() {
+      const token = await userStore.fetchCsrfToken()
+      if (token) {
+        setCsrf(token)
+      }
+    }
+
+    fetchCsrfToken()
+  }, [userStore])
 
   function onLoginInputHandler(e: ChangeEvent<HTMLInputElement>) {
     setLogin(e.target.value)
@@ -31,17 +37,11 @@ export function Component() {
       return
     }
 
-    dispatch(signin({ login, password, csrf: '170c1f42-f448-43d6-adf4-76a8d7c21c60' }))
+    userStore.login({ login, password, csrf })
   }
-
-  // "wrong pass"
-  // if (errorText.length > 0) {
-
-  // }
 
   return (
     <S.Form onSubmit={onSubmitHandler}>
-      {errorText.length > 0 ? 'wrong' : null}
       <S.Title>Login</S.Title>
       <InputText
         value={login}
@@ -53,12 +53,13 @@ export function Component() {
         label={'Password'}
         onInput={onPasswordInputHandler}
       />
-      {/* <InputCsrf onChange={(token) => setCsrf(token)} /> */}
       <Button type='submit'>
         Submit
       </Button>
     </S.Form>
   )
 }
+
+// export const Component = LoginPage
 
 Component.displayName = 'LoginForm'

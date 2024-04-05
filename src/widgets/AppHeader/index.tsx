@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { useScroll, useTransform } from "framer-motion";
+import { observer } from 'mobx-react-lite'
 import ThemeToggler from "@/widgets/ThemeToggler";
 import * as S from "./styles";
+import { UserContext } from "@/app/contexts/user";
+import { useContext } from "react";
 
-export default function AppHeader() {
+function Component() {
+    const userStore = useContext(UserContext)
+
     const { scrollY } = useScroll();
     const height = useTransform(scrollY, [0, 100], [100, 60]);
 
@@ -25,6 +30,7 @@ export default function AppHeader() {
                             <li>
                                 <NavLink to="/about">About me</NavLink>
                             </li>
+                            {userStore!.getIsAuth ? 'auth' : 'not auth'}
                             {/* {isUserAuth && (
                                 <li>
                                     <NavLink to="/admin">admin</NavLink>
@@ -40,3 +46,5 @@ export default function AppHeader() {
         </S.Header>
     );
 }
+
+export const AppHeader = observer(Component)

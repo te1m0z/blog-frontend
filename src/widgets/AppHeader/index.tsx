@@ -30,7 +30,7 @@ function Component() {
                             <li>
                                 <NavLink to="/about">About me</NavLink>
                             </li>
-                            {userStore!.getIsAuth ? 'auth' : 'not auth'}
+                            {userStore.isAuth ? 'auth' : 'not auth'}
                             {/* {isUserAuth && (
                                 <li>
                                     <NavLink to="/admin">admin</NavLink>

@@ -1,6 +1,6 @@
 import type { ReactNode, ReactElement, ChangeEvent, FocusEvent } from "react";
 import React, { useRef, useMemo } from "react";
-import type { ChangeHandler, RefCallBack, FieldError, Merge, FieldErrorsImpl } from 'react-hook-form'
+import type { ChangeHandler, RefCallBack } from 'react-hook-form'
 import cn from "classnames";
 import * as S from './styles'
 
@@ -81,7 +81,7 @@ export function InputText(props: InputProps) {
         focusInput()
     }
 
-    function onBlurHandler(event: FocusEvent<HTMLInputElement, Element>) {
+    function onBlurHandler(event: FocusEvent<HTMLInputElement>) {
         if (!isFocused) {
             return
         }
@@ -121,7 +121,7 @@ export function InputText(props: InputProps) {
                 {errorText.length > 0 && (
                     <div className="error">{errorText}</div>
                 )}
-                
+
             </S.InputContent>
 
             {rightSidebar}

@@ -1,6 +1,6 @@
-import type { ReactNode, ReactElement, ChangeEvent } from "react";
+import type { ReactNode, ReactElement, ChangeEvent, FocusEvent } from "react";
 import React, { useRef, useMemo } from "react";
-import { type ChangeHandler, type RefCallBack } from 'react-hook-form'
+import type { ChangeHandler, RefCallBack, FieldError, Merge, FieldErrorsImpl } from 'react-hook-form'
 import cn from "classnames";
 import * as S from './styles'
 
@@ -11,7 +11,8 @@ interface InputProps {
     label?: string
     disabled?: boolean;
     autocomplete?: 'off' | 'on'
-    error?: string;
+    error?: boolean
+    errorText?: string
     labelClass?: string
     onInput?: (e: ChangeEvent<HTMLInputElement>) => void
     onChange?: ChangeHandler
@@ -31,7 +32,8 @@ export function InputText(props: InputProps) {
     const name = props.name || ''
     const disabled = props.disabled || false;
     const autocomplete = props.autocomplete || 'off'
-    const error = props.error || "";
+    const error = props.error || false;
+    const errorText = props.errorText || '';
     const labelClass = props.labelClass || '';
     const onInput = props.onInput || (() => { });
     const onChange = props.onChange || (() => { });
@@ -79,18 +81,18 @@ export function InputText(props: InputProps) {
         focusInput()
     }
 
-    // function onBlurHandler() {
-    //     if (!isFocused) {
-    //         return
-    //     }
-    //     setIsFocused(false)
-    //     onBlur()
-    // }
+    function onBlurHandler(event: FocusEvent<HTMLInputElement, Element>) {
+        if (!isFocused) {
+            return
+        }
+        setIsFocused(false)
+        onBlur(event)
+    }
 
     return (
         <S.Input
             ref={tooltipParentRef}
-            className={cn("input", { disabled, error })}
+            className={cn("input", { disabled, error: error || errorText })}
             onClick={onClick}
         >
             {leftSidebar}
@@ -112,16 +114,14 @@ export function InputText(props: InputProps) {
                     autoComplete={autocomplete}
                     onInput={onInput}
                     onFocus={onFocusHandler}
-                    onBlur={onBlur}
+                    onBlur={onBlurHandler}
                     onChange={onChange}
                 />
 
-                {/* <Transition name="fade">
-                    <ErrorMessage
-                        :name="name"
-                        :class="['input-error', errorClass]"
-                    />
-                </Transition> */}
+                {errorText.length > 0 && (
+                    <div className="error">{errorText}</div>
+                )}
+                
             </S.InputContent>
 
             {rightSidebar}

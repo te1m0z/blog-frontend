@@ -12,18 +12,14 @@ const FETCH_CSRF = 'csrf'
 
 /**
  * Вход в аккаунт с помощью логина и пароля
- * Функция должна вернуть успешный объект юзера или ошибку с полями
+ * Функция должна вернуть успешный объект юзера или false
  */
 export async function loginWithPassword(params: IUserLoginParams) {
     try {
         const response = await http.post<IUserLoginSuccess>(USER_LOGIN, params)
-        return { response: response.data.data }
+        return response.data.data
     } catch (err: unknown) {
-        if (isAxiosError(err) && err.response) {
-            const errData = err.response.data as IUserLoginError
-            return { error: errData.errors }
-        }
-        throw err
+        return false
     }
 }
 
@@ -37,7 +33,7 @@ export async function fetchCsrfToken() {
         return { response: response.data.data }
     } catch (err: unknown) {
         if (isAxiosError(err) && err.response) {
-            const errData = err.response.data
+            const errData = err.response.data as IUserLoginError
             return { error: errData.errors }
         }
         throw err

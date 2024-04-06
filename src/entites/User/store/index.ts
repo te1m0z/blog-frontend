@@ -42,7 +42,7 @@ export class User {
     }
 
     async login(payload: IUserLoginParams) {
-        const { response, error } = await api.loginWithPassword(payload)
+        const response = await api.loginWithPassword(payload)
 
         if (response) {
             this.setIsAuth(true);
@@ -51,7 +51,7 @@ export class User {
             return true
         }
 
-        return error
+        return false
     }
 
     async fetchCsrfToken() {

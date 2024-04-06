@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { type ChangeEvent, type FormEvent } from 'react'
+import { useForm } from 'react-hook-form'
 import { InputText, Button } from '@/shared'
 import { UserContext } from '@/app/contexts/user'
 import * as S from './styles'
@@ -10,6 +10,8 @@ export function Component() {
   const [csrf, setCsrf] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
+
+  const { register, handleSubmit, formState, watch } = useForm();
 
   useEffect(() => {
     async function fetchCsrfToken() {
@@ -22,44 +24,40 @@ export function Component() {
     fetchCsrfToken()
   }, [userStore])
 
-  function onLoginInputHandler(e: ChangeEvent<HTMLInputElement>) {
-    setLogin(e.target.value)
+  async function onSubmitHandler(data) {
+    console.log(data)
+
+    // if (!login || !password) {
+    //   return
+    // } 
+    // userStore.login({ login, password, csrf })
   }
 
-  function onPasswordInputHandler(e: ChangeEvent<HTMLInputElement>) {
-    setPassword(e.target.value)
-  }
+  const loginField = register('login', { required: true, min: 3 })
 
-  async function onSubmitHandler(event: FormEvent) {
-    event.preventDefault()
+  const loginValue = watch('login', '')
 
-    if (!login || !password) {
-      return
-    }
-
-    userStore.login({ login, password, csrf })
-  }
+  console.log(formState)
 
   return (
-    <S.Form onSubmit={onSubmitHandler}>
+    <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
       <S.Title>Login</S.Title>
       <InputText
-        value={login}
-        label={'Login'}
-        onInput={onLoginInputHandler}
+        name={loginField.name}
+        value={loginValue}
+        onChange={loginField.onChange}
+        onBlur={loginField.onBlur}
+        inputRef={loginField.ref}
+        error={'dada'}
       />
-      <InputText
-        value={password}
-        label={'Password'}
-        onInput={onPasswordInputHandler}
-      />
+      {/* <InputText
+        field={register('password', { required: true })}
+      /> */}
       <Button type='submit'>
         Submit
       </Button>
     </S.Form>
   )
 }
-
-// export const Component = LoginPage
 
 Component.displayName = 'LoginForm'

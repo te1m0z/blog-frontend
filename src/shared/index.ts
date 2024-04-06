@@ -12,5 +12,5 @@ export type { TAppLocalStorage } from './types/Storage'
 
 /* UI */
 export { default as Icon } from './ui/Icon'
-export { default as InputText } from './ui/InputText'
+export { InputText } from './ui/InputText'
 export { default as Button } from './ui/Button'

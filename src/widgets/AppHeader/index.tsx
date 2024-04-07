@@ -1,36 +1,35 @@
-import { NavLink } from "react-router-dom";
-import { useScroll, useTransform } from "framer-motion";
 import { observer } from 'mobx-react-lite'
 import ThemeToggler from "@/widgets/ThemeToggler";
-import * as S from "./styles";
+import { LocaleToggler } from "@/widgets/LocaleToggler";
 import { UserContext } from "@/app/contexts/user";
 import { useContext } from "react";
+import { LocalizedLink } from '@/shared'
+import * as S from "./styles";
 
 function Component() {
-    const userStore = useContext(UserContext)
+    // const userStore = useContext(UserContext)
 
-    const { scrollY } = useScroll();
-    const height = useTransform(scrollY, [0, 100], [100, 60]);
+    console.log(`13131`)
 
     return (
         <S.Header>
             <div className="container">
-                <S.Inner style={{ height }}>
+                <S.Inner>
                     <S.LogoBlock>
-                        <NavLink to="/">Te1m0z</NavLink>
+                        <LocalizedLink to="/">Te1m0z</LocalizedLink>
                     </S.LogoBlock>
                     <S.MenuBlock>
                         <ul>
                             <li>
-                                <NavLink to="/notes">Notes</NavLink>
+                                <LocalizedLink to="/notes">Notes</LocalizedLink>
                             </li>
                             <li>
-                                <NavLink to="/portfolio">Portfolio</NavLink>
+                                <LocalizedLink to="/portfolio">Portfolio</LocalizedLink>
                             </li>
                             <li>
-                                <NavLink to="/about">About me</NavLink>
+                                <LocalizedLink to="/about">About me</LocalizedLink>
                             </li>
-                            {userStore.isAuth ? 'auth' : 'not auth'}
+                            {/* {userStore.isAuth ? 'auth' : 'not auth'} */}
                             {/* {isUserAuth && (
                                 <li>
                                     <NavLink to="/admin">admin</NavLink>
@@ -38,13 +37,16 @@ function Component() {
                             )} */}
                         </ul>
                     </S.MenuBlock>
-                    <S.ThemeBlock>
-                        <ThemeToggler />
-                    </S.ThemeBlock>
+                    <S.RightBlock>
+                        <S.ThemeBlock>
+                            <ThemeToggler />
+                        </S.ThemeBlock>
+                        <LocaleToggler />
+                    </S.RightBlock>
                 </S.Inner>
             </div>
         </S.Header>
     );
 }
 
-export const AppHeader = observer(Component)
+export const AppHeader = Component

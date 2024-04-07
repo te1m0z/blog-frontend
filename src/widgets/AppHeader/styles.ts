@@ -28,7 +28,6 @@ export const LogoBlock = styled.div`
 `
 
 export const MenuBlock = styled.nav`
-  margin: 0 -10px;
   font-family: ${THEME.FONT_FAMILIES.poppins};
 
   & a {
@@ -60,4 +59,11 @@ export const MenuBlock = styled.nav`
 export const ThemeBlock = styled.div`
   display: flex;
   align-items: center;
+  height: 20px;
+`
+
+export const RightBlock = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
 `

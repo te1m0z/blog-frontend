@@ -9,8 +9,11 @@ interface UserProviderProps {
     children: ReactNode
 }
 
-export const UserProvider = ({ children }: UserProviderProps) => (
-    <UserContext.Provider value={userStore}>
-        {children}
-    </UserContext.Provider>
-)
+export const UserProvider = ({ children }: UserProviderProps) => {
+    console.log('UserProvider')
+    return (
+        <UserContext.Provider value={userStore}>
+            {children}
+        </UserContext.Provider>
+    )
+}

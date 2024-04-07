@@ -3,7 +3,6 @@ import { BaseLayout } from "@/app/layouts/Base"
 import HomePage from "@/pages/Home"
 import NotFoundPage from "@/pages/NotFound"
 import { TAppLocale } from "@/entites/locale"
-import { Root } from "./root"
 
 export const routesNames = {
     Home: 'Home',
@@ -11,7 +10,7 @@ export const routesNames = {
     Admin: 'Admin'
 }
 
-const SUPPORTED_LOCALES: TAppLocale[] = ['en', 'ru']
+// const SUPPORTED_LOCALES: TAppLocale[] = ['en', 'ru']
 
 const routes: RouteObject[] = [
     {

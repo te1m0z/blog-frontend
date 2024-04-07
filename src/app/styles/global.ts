@@ -1,12 +1,12 @@
-import { createGlobalStyle } from 'styled-components'
-import { THEME } from '@/shared'
+import styled, { createGlobalStyle } from "styled-components";
+import { THEME } from "@/shared";
 
 export const GlobalStylesWithTheme = createGlobalStyle`
 	body {
 		color: ${THEME.TEXT_COLOR};
 		background-color: ${THEME.BG_COLOR};
 	}
-`
+`;
 
 export const GlobalStyles = createGlobalStyle`
 	html {
@@ -51,4 +51,31 @@ export const GlobalStyles = createGlobalStyle`
 		font-size: ${THEME.FONT_SIZES.large};
 		border-bottom: 1px solid;
 	}
-`
+`;
+
+export const hoverUnderline = styled.div`
+	&.active {
+		&::before {
+		width: 100%;
+		}
+  	}
+
+	&:hover {
+		&::before {
+		width: 100%;
+		right: auto;
+		left: 0;
+		}
+	}
+
+  	&::before {
+		content: '';
+		position: absolute;
+		bottom: -10px;
+		right: 0;
+		width: 0%;
+		height: 1px;
+		background-color: ${THEME.TEXT_COLOR};
+		transition: width 300ms ease;
+  	}
+`;

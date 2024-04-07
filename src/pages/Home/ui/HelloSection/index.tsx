@@ -1,16 +1,11 @@
-import { useTranslation } from 'react-i18next'
 import * as S from './styles'
 
 export default function HelloSection() {
-
-  const { t } = useTranslation()
-
   return (
     <S.HelloSection>
       <S.Background />
       <S.Left>
         <S.Title>
-          <div className="">{t('test')}</div>
           <span className='iam'>Hi, my name is Dmitry I am a Web &nbsp;<span className='dev'>Developer</span></span>
         </S.Title>
         <S.Description>

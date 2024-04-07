@@ -4,8 +4,10 @@ import { redirect } from "react-router-dom"
 import { InputText, Button } from '@/shared'
 import { UserContext } from '@/app/contexts/user'
 import * as S from './styles'
+import { useTranslation } from 'react-i18next'
 
 export function Component() {
+  const { t } = useTranslation()
   const userStore = useContext(UserContext)
 
   const [csrf, setCsrf] = useState('')
@@ -50,6 +52,8 @@ export function Component() {
   return (
     <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
       <S.Title>Login</S.Title>
+
+      <div className="">{t('test')}</div>
 
       <InputText
         name={loginField.name}

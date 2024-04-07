@@ -1,0 +1,1 @@
+export type { TAppLocale } from './types/Locale'

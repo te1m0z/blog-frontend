@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
@@ -13,11 +12,9 @@ const root = document.getElementById('root')
 ReactDOM.createRoot(root!).render(
     <UserProvider>
       <AppThemeProvider>
-        <Suspense fallback={<div>Loading...</div>}>
-          <AppStyles />
-          <RouterProvider router={router} />
-          <Toaster position='top-right' />
-        </Suspense>
+        <AppStyles />
+        <RouterProvider router={router} />
+        <Toaster position='top-right' />
       </AppThemeProvider>
     </UserProvider>
 )

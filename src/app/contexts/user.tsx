@@ -1,4 +1,4 @@
-import { type ReactNode, createContext } from 'react'
+import { type ReactNode, createContext, memo } from 'react'
 import { User } from '@/entites/User/store'
 
 const userStore = new User()
@@ -9,11 +9,10 @@ interface UserProviderProps {
     children: ReactNode
 }
 
-export const UserProvider = ({ children }: UserProviderProps) => {
-    console.log('UserProvider')
+export const UserProvider = memo(({ children }: UserProviderProps) => {
     return (
         <UserContext.Provider value={userStore}>
             {children}
         </UserContext.Provider>
     )
-}
+})

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-export const TooltipTrigger = forwardRef(function(props, ref) {
+export const TooltipTrigger = forwardRef(function TooltipTrigger(props, ref) {
     console.log('TooltipTrigger', props, ref)
     // const context = useTooltipContext();
     // console.log('children', children)

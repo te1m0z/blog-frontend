@@ -16,7 +16,7 @@ export const Inner = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* height: ${THEME.SIZES.header}; */
+  height: ${THEME.SIZES.header};
 
   /* @media ${THEME.DEVICES.md} {
     height: 50px;

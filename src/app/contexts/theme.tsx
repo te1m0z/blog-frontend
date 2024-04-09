@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useState, type ReactNode, memo } from 'react'
 import { ThemeProvider } from 'styled-components'
 // import { setCookie } from 'cookies-next'
 import { type TAppTheme, THEME } from '@/shared'
@@ -9,7 +9,7 @@ interface IProps {
   theme?: TAppTheme
 }
 
-const AppThemeProvider = (props: IProps) => {
+const AppThemeProvider = memo((props: IProps) => {
   const { children, theme } = props
   const systemTheme = useThemeDetector()
   const initialTheme = theme || THEME.DEFAULT_THEME
@@ -40,7 +40,7 @@ const AppThemeProvider = (props: IProps) => {
       {children}
     </ThemeProvider>
   )
-}
+})
 
 export {
   AppThemeProvider,

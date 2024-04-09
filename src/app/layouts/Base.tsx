@@ -8,7 +8,6 @@ const Main = styled.main`
 `
 
 export function BaseLayout() {
-    console.log('BaseLayout')
     return (
         <div className="layout base-layout">
             <AppHeader />

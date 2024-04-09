@@ -1,23 +1,24 @@
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
-import HttpApi from "i18next-http-backend"
 import languageDetector from 'i18next-browser-languagedetector'
+
+import en from '@/app/assets/locales/en.json'
+import ru from '@/app/assets/locales/ru.json'
 
 i18n
     .use(initReactI18next)
     .use(languageDetector)
-    .use(HttpApi)
     .init({
-        backend: {
-            loadPath: '/locales/{{lng}}.json',
+        resources: {
+            en,
+            ru
         },
-        load: 'currentOnly',
+        lng: import.meta.env.VITE_DEFAULT_LOCALE,
         fallbackLng: import.meta.env.VITE_DEFAULT_LOCALE,
         supportedLngs: ['en', 'ru'],
         detection: {
             order: ['path']
-        },
-        partialBundledLanguages: true
+        }
     })
 
 export default i18n

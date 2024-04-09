@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite'
 import ThemeToggler from "@/widgets/ThemeToggler";
 import { LocaleToggler } from "@/widgets/LocaleToggler";
 import { UserContext } from "@/app/contexts/user";
@@ -7,9 +6,7 @@ import { LocalizedLink } from '@/shared'
 import * as S from "./styles";
 
 function Component() {
-    // const userStore = useContext(UserContext)
-
-    console.log(`13131`)
+    const userStore = useContext(UserContext)
 
     return (
         <S.Header>
@@ -29,13 +26,8 @@ function Component() {
                             <li>
                                 <LocalizedLink to="/about">About me</LocalizedLink>
                             </li>
-                            {/* {userStore.isAuth ? 'auth' : 'not auth'} */}
-                            {/* {isUserAuth && (
-                                <li>
-                                    <NavLink to="/admin">admin</NavLink>
-                                </li>
-                            )} */}
                         </ul>
+                        {userStore.isAuth ? 'auth' : 'not auth'}
                     </S.MenuBlock>
                     <S.RightBlock>
                         <S.ThemeBlock>

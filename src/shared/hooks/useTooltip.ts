@@ -1,13 +1,31 @@
-import { useContext } from "react";
-import { ITooltipProps } from "../ui/Tooltip/Tooltip";
+import * as React from "react";
+import {
+    useFloating,
+    autoUpdate,
+    offset,
+    flip,
+    shift,
+    useHover,
+    useFocus,
+    useDismiss,
+    useRole,
+    useInteractions
+} from "@floating-ui/react";
+import type { Placement } from "@floating-ui/react"
+
+interface TooltipOptions {
+    initialOpen?: boolean;
+    placement?: Placement;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+}
 
 export function useTooltip({
     initialOpen = false,
     placement = "top",
-    offset = 5,
     open: controlledOpen,
-    onOpenChange: setControlledOpen,
-}: ITooltipProps = {}) {
+    onOpenChange: setControlledOpen
+}: TooltipOptions = {}) {
     const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen);
 
     const open = controlledOpen ?? uncontrolledOpen;
@@ -19,24 +37,24 @@ export function useTooltip({
         onOpenChange: setOpen,
         whileElementsMounted: autoUpdate,
         middleware: [
-            offsetMiddleware(offset),
+            offset(5),
             flip({
                 crossAxis: placement.includes("-"),
                 fallbackAxisSideDirection: "start",
-                padding: 5,
+                padding: 5
             }),
-            shift({ padding: 5 }),
-        ],
+            shift({ padding: 5 })
+        ]
     });
 
     const context = data.context;
 
     const hover = useHover(context, {
         move: false,
-        enabled: controlledOpen == null,
+        enabled: controlledOpen == null
     });
     const focus = useFocus(context, {
-        enabled: controlledOpen == null,
+        enabled: controlledOpen == null
     });
     const dismiss = useDismiss(context);
     const role = useRole(context, { role: "tooltip" });
@@ -48,18 +66,8 @@ export function useTooltip({
             open,
             setOpen,
             ...interactions,
-            ...data,
+            ...data
         }),
         [open, setOpen, interactions, data]
     );
-}
-
-export const useTooltipContext = () => {
-    const context = useContext(TooltipContext)
-
-    if (context == null) {
-        throw new Error("Tooltip components must be wrapped in <Tooltip />");
-    }
-
-    return context;
 }

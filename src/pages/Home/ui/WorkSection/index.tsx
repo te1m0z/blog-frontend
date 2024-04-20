@@ -6,7 +6,7 @@ const WorkSectionMotion = motion(S.Parent)
 
 export default function WorkSection() {
     return (
-        <WorkSectionMotion initial={{ opacity: 0 }} transition={{ delay: 0.2 }} whileInView={{ opacity: 1 }}>
+        <WorkSectionMotion>
             <S.Title className="block-title">
                 Work
             </S.Title>

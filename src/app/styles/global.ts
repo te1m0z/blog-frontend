@@ -29,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
 		display: flex;
 		flex-flow: column nowrap;
 		min-width: 320px;
-		min-height: 100vh;
+		min-height: 300vh;
 	}
 
 	.container {

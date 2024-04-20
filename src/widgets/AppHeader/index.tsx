@@ -8,6 +8,8 @@ import * as S from "./styles";
 function Component() {
     const userStore = useContext(UserContext)
 
+    console.log(123)
+
     return (
         <S.Header>
             <div className="container">

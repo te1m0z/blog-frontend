@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
+import {  } from 'mobx-react-lite'
 import { AppThemeProvider } from '@/app/contexts/theme'
 import { UserProvider } from '@/app/contexts/user'
 import { router } from '@/app/router'

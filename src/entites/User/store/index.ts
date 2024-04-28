@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from "mobx"
-import type { IUser } from '@/shared'
+import { appLocalStorage, type IUser } from '@/shared'
 import type { IUserLoginParams } from './types'
 import * as api from './api'
 
@@ -31,6 +31,12 @@ export class User {
             setIsAuth: action,
             login: action,
         })
+
+        const token = appLocalStorage.get('access_token')
+
+        if (token) {
+            this._accessToken = token
+        }
     }
 
     setIsAuth(value: boolean) {
@@ -41,12 +47,38 @@ export class User {
         this._user = user
     }
 
+    setAccessToken(token: string) {
+        this._accessToken = token
+        window.localStorage.setItem('access_token', token)
+        // appLocalStorage.set('access_token', token)
+    }
+
+    async fetchUserData() {
+        const { response } = await api.fetchUserData()
+
+        if (response) {
+            this.setIsAuth(true);
+            this.setUser({
+                id: response.id,
+                login: response.attributes.login
+            })
+
+            return true
+        }
+
+        return false
+    }
+
     async login(payload: IUserLoginParams) {
         const response = await api.loginWithPassword(payload)
 
         if (response) {
             this.setIsAuth(true);
-            this.setUser(response);
+            this.setUser({
+                id: response.id,
+                login: response.login
+            });
+            this.setAccessToken(response.access_token)
             
             return true
         }

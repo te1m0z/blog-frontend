@@ -4,11 +4,24 @@ import type {
     IUserLoginParams,
     IUserLoginSuccess,
     IUserLoginError,
-    IFetchCsrfTokenApiSuccess
+    IFetchCsrfTokenApiSuccess,
+    IUserDataSuccess
 } from "./types"
 
+const USER_DATA = 'user'
 const USER_LOGIN = 'user/login'
 const FETCH_CSRF = 'csrf'
+
+/**
+ */
+export async function fetchUserData() {
+    try {
+        const response = await http.get<IUserDataSuccess>(USER_DATA)
+        return { response: response.data.data }
+    } catch {
+        return { error: 'user is not logged in' }
+    }
+}
 
 /**
  * Вход в аккаунт с помощью логина и пароля

@@ -24,7 +24,7 @@ const createStorage = <T extends Record<string, any>>(type: StorageType = 'local
       return null
     }
 
-    return JSON.parse(value) as T[K]
+    return typeof value === 'string' ? value as T[K] : JSON.parse(value) as T[K]
   }
 
   const getAll = (): Record<keyof T, T[keyof T] | null> => {

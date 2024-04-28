@@ -1,6 +1,5 @@
 import axios, { AxiosError } from 'axios'
 import { toast } from 'react-hot-toast'
-import { appLocalStorage } from '@/shared'
 
 export const http = axios.create({
     baseURL: import.meta.env.VITE_API_DOMAIN,
@@ -14,10 +13,10 @@ export const http = axios.create({
 })
 
 http.interceptors.request.use((config) => {
-    const accessToken = appLocalStorage.get('access_token')
+    const accessToken = window.localStorage.getItem('access_token')
 
     if (accessToken) {
-        config.headers.Authorization = accessToken
+        config.headers.Authorization = `Bearer ${accessToken}`
     }
 
     return config

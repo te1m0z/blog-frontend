@@ -1,7 +1,9 @@
-import { TAppLocale } from "@/entites/locale"
+import { TAppLocale } from "@/shared"
 
 export interface TAppLocalStorage {
-    access_token: string
-    refresh_token: string
+    jwt: {
+        access_token: string
+        refresh_token: string
+    }
     locale: TAppLocale
 }

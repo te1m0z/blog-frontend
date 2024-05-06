@@ -19,7 +19,7 @@ interface InputProps {
     onClick?: () => void;
     onFocus?: () => void;
     onBlur?: ChangeHandler
-    inputRef: RefCallBack
+    inputRef?: RefCallBack
     children?: ReactNode | ReactNode[]
 }
 
@@ -92,7 +92,7 @@ export function InputText(props: InputProps) {
     return (
         <S.Input
             ref={tooltipParentRef}
-            className={cn("input", { disabled, error: error || errorText })}
+            className={cn("input", { disabled, error: error || errorText.length > 0 })}
             onClick={onClick}
         >
             {leftSidebar}
@@ -107,7 +107,11 @@ export function InputText(props: InputProps) {
                 )}
                 
                 <S.InputValue
-                    ref={props.inputRef}
+                    ref={(e) => {
+                        /* if inputRef exist then pass ref to it */
+                        props.inputRef && props.inputRef(e)
+                        inputValueRef.current = e
+                    }}
                     type={type}
                     name={name}
                     value={props.value}
@@ -119,7 +123,7 @@ export function InputText(props: InputProps) {
                 />
 
                 {errorText.length > 0 && (
-                    <div className="error">{errorText}</div>
+                    <S.InputErrorBlock className="error">{errorText}</S.InputErrorBlock>
                 )}
 
             </S.InputContent>

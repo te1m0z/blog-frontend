@@ -1,6 +1,13 @@
 {
     "test": "RUUU",
+    "auth": {
+        "login": "Логин",
+        "password": "Пароль"
+    },
     "messages": {
         "wrong_login_or_password": "Неправильный логин или пароль"
+    },
+    "not_found": {
+        "get_lost": "Вас не должно быть тут, заблудились? O_o"
     }
 }

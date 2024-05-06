@@ -16,7 +16,13 @@ export interface IUserLoginParams {
     csrf: string
 }
 
-export interface IUserLoginSuccess extends IBaseServerSuccess<IUser> {}
+export interface IUserLoginSuccess {
+    status: true
+    data: IUser & {
+        access_token: string
+        refresh_token: string
+    }
+}
 
 export interface IUserLoginError extends IBaseServerError {
     errors: {

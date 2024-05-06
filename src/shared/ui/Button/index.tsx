@@ -8,8 +8,8 @@ interface IProps {
 
 export default function Button({ type = 'button', children }: IProps) {
   return (
-    <S.Button type={type}>
+    <S.ButtonStyled type={type}>
       {children}
-    </S.Button>
+    </S.ButtonStyled>
   )
 }

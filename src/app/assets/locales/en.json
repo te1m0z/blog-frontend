@@ -1,6 +1,13 @@
 {
     "test": "ENNN",
+    "auth": {
+        "login": "Login",
+        "password": "Password"
+    },
     "messages": {
         "wrong_login_or_password": "Wrong login or password"
+    },
+    "not_found": {
+        "get_lost": "You shouldn't be here, lost? O_o"
     }
 }

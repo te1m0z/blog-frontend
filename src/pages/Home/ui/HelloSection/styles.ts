@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from '@/shared/ui/Button/styles'
+import { ButtonStyled } from '@/shared/ui/Button/styles'
 import { FONT_FAMILIES, TEXT_COLOR, FONT_WEIGHTS } from '@/shared/constants/theme'
 
 export const HelloSection = styled.div`
@@ -55,7 +55,7 @@ export const Description = styled.div`
   color: ${TEXT_COLOR};
 `
 
-export const ViewPortfolioButton = styled(Button)`
+export const ViewPortfolioButton = styled(ButtonStyled)`
   width: 215px;
 `
 

@@ -1,3 +1,4 @@
+import { appLocalStorage } from '@/shared'
 import axios, { AxiosError } from 'axios'
 import { toast } from 'react-hot-toast'
 
@@ -13,10 +14,10 @@ export const http = axios.create({
 })
 
 http.interceptors.request.use((config) => {
-    const accessToken = window.localStorage.getItem('access_token')
+    const jwt = appLocalStorage.get('jwt')
 
-    if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`
+    if (jwt && jwt.access_token) {
+        config.headers.Authorization = `Bearer ${jwt.access_token}`
     }
 
     return config

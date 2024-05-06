@@ -1,6 +1,7 @@
+import { ButtonStyled } from '@/shared/ui/Button/styles'
 import styled from 'styled-components'
 
-export const Form = styled.form`
+export const LoginForm = styled.form`
   display: flex;
   flex-flow: column nowrap;
   row-gap: 20px;
@@ -8,25 +9,17 @@ export const Form = styled.form`
   margin: 0 auto;
 `
 
-export const Title = styled.div`
-  font-size: 20px;
+export const LoginFormTitle = styled.div`
   text-align: center;
 `
 
-export const InputContainer = styled.div`
-  margin-bottom: 20px;
-
-  /* &:last-of-type {
-    margin-bottom: 40px;
-  } */
+export const LoginFormSubmitBtn = styled(ButtonStyled)`
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px;
 `
 
-export const FormTitle = styled.h3`
-  margin-bottom: 40px;
-  font-size: 30px;
+export const LoginFormErrorBlock = styled.div`
   text-align: center;
-`
-
-export const FormError = styled.div`
   color: red;
 `

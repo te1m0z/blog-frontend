@@ -9,8 +9,6 @@ export const routesNames = {
     Admin: 'Admin'
 }
 
-// const SUPPORTED_LOCALES: TAppLocale[] = ['en', 'ru']
-
 const routes: RouteObject[] = [
     {
         path: '/:lng?',
@@ -29,18 +27,12 @@ const routes: RouteObject[] = [
                 lazy: () => import('@/pages/Login')
             },
             {
+                path: 'admin',
+                lazy: () => import('@/pages/Admin')
+            },
+            {
                 path: '*',
                 Component: NotFoundPage
-            }
-        ]
-    },
-    {
-        path: '/admin',
-        lazy: () => import('@/app/layouts/Admin'),
-        children: [
-            {
-                path: '',
-                lazy: () => import('@/pages/Admin')
             }
         ]
     }

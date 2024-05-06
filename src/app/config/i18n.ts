@@ -18,12 +18,11 @@ i18n
         // backend: {
         //     loadPath: '/locales/{{lng}}.json'
         // },
-        load: 'currentOnly',
+        // load: 'currentOnly',
         fallbackLng: import.meta.env.VITE_DEFAULT_LOCALE,
         supportedLngs: ['en', 'ru'],
-        detection: {
-            order: ['path']
-        }
+        detection: { order: ['path'] },
+        interpolation: { escapeValue: false },
     })
 
 export default i18n

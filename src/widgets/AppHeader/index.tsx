@@ -2,12 +2,12 @@ import ThemeToggler from "@/widgets/ThemeToggler";
 import { LocaleToggler } from "@/widgets/LocaleToggler";
 import { UserContext } from "@/app/contexts/user";
 import { useContext } from "react";
-import { observer } from 'mobx-react-lite'
-import { LocalizedLink } from '@/shared'
+import { observer } from "mobx-react-lite";
+import { LocalizedLink } from "@/shared";
 import * as S from "./styles";
 
 function Component() {
-    const userStore = useContext(UserContext)
+    const userStore = useContext(UserContext);
 
     return (
         <S.Header>
@@ -22,13 +22,23 @@ function Component() {
                                 <LocalizedLink to="/notes">Notes</LocalizedLink>
                             </li>
                             <li>
-                                <LocalizedLink to="/portfolio">Portfolio</LocalizedLink>
+                                <LocalizedLink to="/portfolio">
+                                    Portfolio
+                                </LocalizedLink>
                             </li>
                             <li>
-                                <LocalizedLink to="/about">About me</LocalizedLink>
+                                <LocalizedLink to="/about">
+                                    About me
+                                </LocalizedLink>
                             </li>
+                            {userStore.isAuth && (
+                                <li>
+                                    <LocalizedLink to="/admin">
+                                        Admin
+                                    </LocalizedLink>
+                                </li>
+                            )}
                         </ul>
-                        {userStore.isAuth ? 'auth' : 'not auth'}
                     </S.MenuBlock>
                     <S.RightBlock>
                         <S.ThemeBlock>
@@ -42,4 +52,4 @@ function Component() {
     );
 }
 
-export const AppHeader = observer(Component)
+export const AppHeader = observer(Component);

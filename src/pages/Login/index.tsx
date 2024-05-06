@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import { useForm, FieldValues } from 'react-hook-form'
-import { redirect } from "react-router-dom"
-import { InputText, Button } from '@/shared'
+import { Navigate, redirect } from "react-router-dom"
+import { InputText } from '@/shared'
 import { UserContext } from '@/app/contexts/user'
 import * as S from './styles'
 import { useTranslation } from 'react-i18next'
+import { observer } from 'mobx-react-lite'
 
-export function Component() {
+function LoginPage() {
   const { t } = useTranslation()
   const userStore = useContext(UserContext)
 
@@ -36,10 +37,10 @@ export function Component() {
     setError('login', { type: 'wrong_data' })
     setError('password', { type: 'wrong_data' })
 
-    setFormMessage('wrong pass or login')
+    setFormMessage(t('messages.wrong_login_or_password'))
   }
 
-  const loginField = register('login', { required: 'required!!' })
+  const loginField = register('login', { required: 'required!!', minLength: { value: 5, message: 'dadwa' } })
   const loginValue = watch('login', '')
 
   const passwordField = register('password', { required: 'required!!' })
@@ -49,13 +50,16 @@ export function Component() {
     setFormMessage('')
   }, [loginValue, passwordValue])
 
-  return (
-    <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <S.Title>Login</S.Title>
+  if (userStore.isAuth) {
+    return <Navigate to={'/admin'} replace={true} />
+  }
 
-      <div className="">{t('test')}</div>
+  return (
+    <S.LoginForm onSubmit={handleSubmit(onSubmitHandler)}>
+      <S.LoginFormTitle>{t('not_found.get_lost')}</S.LoginFormTitle>
 
       <InputText
+        label={t('auth.login')}
         name={loginField.name}
         value={loginValue}
         onChange={loginField.onChange}
@@ -66,6 +70,7 @@ export function Component() {
       />
       
       <InputText
+        label={t('auth.password')}
         name={passwordField.name}
         value={passwordValue}
         onChange={passwordField.onChange}
@@ -75,13 +80,19 @@ export function Component() {
         errorText={formState.errors.password?.message as string}
       />
 
-      <Button type='submit'>
+      <S.LoginFormSubmitBtn type='submit'>
         Submit
-      </Button>
+      </S.LoginFormSubmitBtn>
 
-      <div className="">{formMessage}</div>
-    </S.Form>
+      <S.LoginFormErrorBlock>
+        {formMessage}
+      </S.LoginFormErrorBlock>
+    </S.LoginForm>
   )
 }
 
-Component.displayName = 'LoginForm'
+const Component = observer(LoginPage)
+
+Component.displayName = 'LoginPage'
+
+export { Component }

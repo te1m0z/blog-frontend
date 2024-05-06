@@ -3,12 +3,13 @@ import { appLocalStorage, type IUser } from '@/shared'
 import type { IUserLoginParams } from './types'
 import * as api from './api'
 
-type TUserPrivateFields = '_user' | '_isAuth' | '_accessToken'
+type TUserPrivateFields = '_user' | '_isAuth' | '_accessToken' | '_refreshToken'
 
 export class User {
     private _user: IUser | null = null
     private _isAuth: boolean = false
     private _accessToken: string | null = null
+    private _refreshToken: string | null = null
 
     get user() {
         return this._user
@@ -22,20 +23,26 @@ export class User {
         return this._accessToken
     }
 
+    get refreshToken() {
+        return this._refreshToken
+    }
+
     constructor() {
         makeObservable<User, TUserPrivateFields>(this, {
             _user: observable,
             _isAuth: observable,
             _accessToken: observable,
+            _refreshToken: observable,
             setUser: action,
             setIsAuth: action,
             login: action,
         })
 
-        const token = appLocalStorage.get('access_token')
+        const jwt = appLocalStorage.get('jwt')
 
-        if (token) {
-            this._accessToken = token
+        if (jwt && jwt.access_token && jwt.refresh_token) {
+            this._accessToken = jwt.access_token
+            this._refreshToken = jwt.refresh_token
         }
     }
 
@@ -47,10 +54,10 @@ export class User {
         this._user = user
     }
 
-    setAccessToken(token: string) {
-        this._accessToken = token
-        window.localStorage.setItem('access_token', token)
-        // appLocalStorage.set('access_token', token)
+    setTokens(access_token: string, refresh_token: string) {
+        this._accessToken = access_token
+        this._accessToken = refresh_token
+        appLocalStorage.set('jwt', { access_token, refresh_token })
     }
 
     async fetchUserData() {
@@ -77,8 +84,8 @@ export class User {
             this.setUser({
                 id: response.id,
                 login: response.login
-            });
-            this.setAccessToken(response.access_token)
+            })
+            this.setTokens(response.access_token, response.refresh_token)
             
             return true
         }

@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { COLORS, FONT_FAMILIES, FONT_WEIGHTS } from '../../constants/theme'
 
-export const Button = styled.button`
+export const ButtonStyled = styled.button`
   position: relative;
   display: block;
   padding: 18px;

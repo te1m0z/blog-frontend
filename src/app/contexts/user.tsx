@@ -4,9 +4,9 @@ import { User } from '@/entites/User/store'
 
 const userStore = new User()
 
-injectStores({
-    userStore
-})
+if (import.meta.env.DEV) {
+    injectStores({ userStore })
+}
 
 export const UserContext = createContext<User>(userStore)
 

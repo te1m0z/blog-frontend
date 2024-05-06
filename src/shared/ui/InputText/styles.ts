@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { TEXT_COLOR, BG_COLOR } from '@/shared/constants/theme'
+import { TEXT_COLOR, BG_COLOR, COLORS } from '@/shared/constants/theme'
 import { media } from '@/app/styles/mixins'
 
 export const Input = styled.div`
@@ -19,45 +19,26 @@ export const Input = styled.div`
   `}
 
   &.error {
-    border-color: orange;
-  }
-
-  &.disabled {
-    .input-content {
-      cursor: default;
-    }
-
-    .input-value,
-    .input-label {
-      color: var(--text-secondary);
-    }
-  }
-
-  .input-error {
-    @include text(400, 12px), 14px));
-
-    position: absolute;
-    bottom: -10px);
-    left: 12px);
-    z-index: 1;
-    padding: 2px) 6px);
-    color: var(--white);
-    white-space: nowrap;
-    background-color: var(--orange);
-    border-radius: 5px);
-
-    @include lg {
-      @include text(400, 12px), 14px));
-
-      bottom: -10px);
-      left: 12px);
-      padding: 2px) 6px);
-      border-radius: 5px);
-    }
+    border-color: ${COLORS.purple};
   }
 `
 
+export const InputErrorBlock = styled.div`
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+  z-index: 1;
+  padding: 2px 4px;
+  color: ${BG_COLOR};
+  white-space: nowrap;
+  background-color: ${COLORS.purple};
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 12px;
+`
+
 export const InputContent = styled.div`
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

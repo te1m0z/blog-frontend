@@ -9,10 +9,13 @@ export const routesNames = {
     Admin: 'Admin'
 }
 
+const lngs = ['', 'ru', 'en']
+
 const routes: RouteObject[] = [
-    {
-        path: '/:lng?',
+    ...lngs.map((lng) => ({
+        path: lng,
         Component: BaseLayout,
+        ErrorBoundary: NotFoundPage,
         children: [
             {
                 path: '',
@@ -35,7 +38,7 @@ const routes: RouteObject[] = [
                 Component: NotFoundPage
             }
         ]
-    }
+    }))
 ]
 
 export const router = createBrowserRouter(routes)

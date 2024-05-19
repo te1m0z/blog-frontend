@@ -2,15 +2,13 @@ import { useState, useContext } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Button, InputText, Tabs } from "@/shared";
-import { Navigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { UserContext } from "@/app/contexts/user";
 import { NoteContext } from "@/app/contexts/note";
 import * as S from "./styles";
 import { useForm, FieldValues } from "react-hook-form";
+import { withAuth } from "@/shared/ui/PrivateRoute";
 
 function AdminPage() {
-    const userStore = useContext(UserContext);
     const notesStore = useContext(NoteContext);
 
     const [note, setNote] = useState({
@@ -23,10 +21,6 @@ function AdminPage() {
 
     const noteTitleField = register("noteTitle", { required: "required!!" });
     const noteTitleValue = watch("noteTitle", "");
-
-    if (!userStore.isAuth) {
-        return <Navigate to={"/"} replace={true} />;
-    }
 
     const modules = {
         toolbar: [
@@ -87,7 +81,7 @@ function AdminPage() {
     );
 }
 
-const Component = observer(AdminPage);
+const Component = observer(withAuth(AdminPage));
 
 Component.displayName = "AdminPage";
 

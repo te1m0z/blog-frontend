@@ -51,6 +51,11 @@ export const GlobalStyles = createGlobalStyle`
 		font-size: ${THEME.FONT_SIZES.large};
 		border-bottom: 1px solid;
 	}
+
+	.ant-skeleton ul,
+	.ant-skeleton li {
+		display: list-item;
+	}
 `;
 
 export const hoverUnderline = styled.div`

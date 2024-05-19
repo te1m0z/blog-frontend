@@ -31,7 +31,7 @@ function LoginPage() {
     const response = await userStore.login({ login, password, csrf })
 
     if (response) {
-      return redirect('/admin')
+      throw redirect('/admin')
     }
 
     setError('login', { type: 'wrong_data' })

@@ -20,6 +20,7 @@ i18n
         // },
         // load: 'currentOnly',
         fallbackLng: import.meta.env.VITE_DEFAULT_LOCALE,
+        debug: true,
         supportedLngs: ['en', 'ru'],
         detection: { order: ['path'] },
         interpolation: { escapeValue: false },

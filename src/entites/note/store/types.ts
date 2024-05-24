@@ -32,3 +32,13 @@ export interface IFetchAllNotesSuccess {
         total: number
     }
 }
+
+/* Fetch single note */
+
+export interface IFetchNoteParams {
+    id: number
+}
+
+export interface IFetchNoteSuccess {
+    data: INote
+}

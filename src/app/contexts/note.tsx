@@ -1,4 +1,4 @@
-import { type ReactNode, createContext, memo, useEffect } from 'react'
+import { type ReactNode, createContext, memo } from 'react'
 import { injectStores } from '@mobx-devtools/tools'
 import { Note } from '@/entites/note/store'
 

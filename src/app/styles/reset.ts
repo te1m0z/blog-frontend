@@ -27,7 +27,6 @@ export const ResetStyles = createGlobalStyle`
   }
 
   a {
-    display: inline-block;
     text-decoration: none;
   }
 

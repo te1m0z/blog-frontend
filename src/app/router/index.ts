@@ -1,6 +1,8 @@
 import { createBrowserRouter, type RouteObject } from "react-router-dom"
 import { BaseLayout } from "@/app/layouts/Base"
 import HomePage from "@/pages/Home"
+import { NotesPage } from "@/pages/Notes"
+import { NotePage } from "@/pages/Note"
 import NotFoundPage from "@/pages/NotFound"
 
 export const routesNames = {
@@ -23,7 +25,16 @@ const routes: RouteObject[] = [
             },
             {
                 path: 'notes',
-                lazy: () => import('@/pages/Notes')
+                children: [
+                    {
+                        path: '',
+                        Component: NotesPage,
+                    },
+                    {
+                        path: ':id',
+                        Component: NotePage
+                    }
+                ]
             },
             {
                 path: 'login',

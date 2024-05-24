@@ -1,5 +1,5 @@
 import { makeObservable, action } from "mobx"
-import type { ICreateNoteParams, IFetchAllNotesParams } from './types'
+import type { ICreateNoteParams, IFetchAllNotesParams, IFetchNoteParams } from './types'
 import * as api from './api'
 
 export class Note {
@@ -18,6 +18,12 @@ export class Note {
 
     async fetchNotes(payload: IFetchAllNotesParams) {
         const { response } = await api.fetchNotes(payload)
+
+        return response
+    }
+
+    async fetchNote(payload: IFetchNoteParams) {
+        const response = await api.fetchNote(payload)
 
         return response
     }

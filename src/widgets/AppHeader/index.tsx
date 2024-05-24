@@ -21,16 +21,6 @@ function Component() {
                             <li>
                                 <LocalizedLink to="/notes">Notes</LocalizedLink>
                             </li>
-                            <li>
-                                <LocalizedLink to="/portfolio">
-                                    Portfolio
-                                </LocalizedLink>
-                            </li>
-                            <li>
-                                <LocalizedLink to="/about">
-                                    About me
-                                </LocalizedLink>
-                            </li>
                             {userStore.isAuth && (
                                 <li>
                                     <LocalizedLink to="/admin">

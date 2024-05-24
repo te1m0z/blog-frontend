@@ -1,15 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { Skeleton, Pagination, Grid, Row, Card, Col, List } from "antd";
-import BlogCard from "@/entites/Blog/ui/BlogCard";
+import { Skeleton, Pagination, Row, Card, Col } from "antd";
 import { NoteContext } from "@/app/contexts/note";
 import { useSearchParams } from "react-router-dom";
-// import Pagination from "@/shared/ui/Pagination";
-import { INote } from "@/shared";
+import { INote, LocalizedLink } from "@/shared";
 
-import * as S from "./styles";
 import Meta from "antd/es/card/Meta";
 
-export function Component() {
+export function NotesPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const noteStore = useContext(NoteContext);
     const [notes, setNotes] = useState<INote[]>([]);
@@ -53,19 +50,24 @@ export function Component() {
                 <>
                     {notes.map((note) => (
                         <Col span={8} key={note.id}>
-                            <Card hoverable>
-                                <Meta
-                                    title={note.title}
-                                    description={
-                                        note.content.length > 100
-                                            ? `${note.content.substring(
-                                                0,
-                                                100
-                                            )}...`
-                                            : note.content
-                                    }
-                                />
-                            </Card>
+                            <LocalizedLink
+                                to={`/notes/${note.id}`}
+                            >
+                                <Card hoverable>
+                                    <Meta
+                                        title={note.title}
+                                        description={
+                                            note.content.length > 100
+                                                ? `${note.content.substring(
+                                                    0,
+                                                    100
+                                                )}...`
+                                                : note.content
+                                        }
+                                    />
+                                </Card>
+                            </LocalizedLink>
+
                         </Col>
                     ))}
                     <Pagination
@@ -78,49 +80,4 @@ export function Component() {
             )}
         </Row>
     );
-
-    return (
-        <S.NotesContainer>
-            <div className="">
-                <Grid />
-                {isNotesLoading ? (
-                    <>
-                        {skeletonNotes.map((note) => (
-                            <BlogCard
-                                key={note.id}
-                                title={note.title}
-                                content={note.content}
-                            />
-                        ))}
-                    </>
-                ) : (
-                    <div className="">
-                        {notes.length > 0 ? (
-                            <>
-                                {notes.map((note) => (
-                                    <BlogCard
-                                        key={note.id}
-                                        title={note.title}
-                                        content={note.content}
-                                    />
-                                ))}
-                                <div className="">
-                                    <Pagination
-                                        current={notesCurrentPage}
-                                        onChange={onPageChangeHandler}
-                                        total={notesTotalPages}
-                                        pageSize={3}
-                                    />
-                                </div>
-                            </>
-                        ) : (
-                            "EMPTY"
-                        )}
-                    </div>
-                )}
-            </div>
-        </S.NotesContainer>
-    );
 }
-
-Component.displayName = "NotesPage";

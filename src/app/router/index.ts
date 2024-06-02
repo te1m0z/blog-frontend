@@ -31,10 +31,14 @@ const routes: RouteObject[] = [
                         Component: NotesPage,
                     },
                     {
-                        path: ':id',
+                        path: ':slug',
                         Component: NotePage
                     }
                 ]
+            },
+            {
+                path: 'about',
+                lazy: () => import('@/pages/About')
             },
             {
                 path: 'login',

@@ -7,7 +7,8 @@ import type {
     IFetchAllNotesSuccess,
     IFetchAllNotesParams,
     IFetchNoteParams,
-    IFetchNoteSuccess
+    IFetchNoteSuccess,
+    IUpdateNoteParams
 } from "./types"
 
 // const USER_DATA = 'user'
@@ -17,7 +18,11 @@ const NOTE_CREATE = 'note'
 // const FETCH_CSRF = 'csrf'
 
 export async function fetchNotes(params: IFetchAllNotesParams) {
-    const url = `${FETCH_ALL_NOTES}?page=${params.page}`
+    let url = `${FETCH_ALL_NOTES}?page=${params.page}`
+
+    if (params.category) {
+        url += `&category=${params.category}`
+    }
     
     // eslint-disable-next-line no-useless-catch
     try {
@@ -29,7 +34,7 @@ export async function fetchNotes(params: IFetchAllNotesParams) {
 }
 
 export async function fetchNote(params: IFetchNoteParams) {
-    const url = `${FETCH_SINGLE_NOTE}/${params.id}`
+    const url = `${FETCH_SINGLE_NOTE}/${params.slug}`
     
     // eslint-disable-next-line no-useless-catch
     try {
@@ -46,6 +51,19 @@ export async function fetchNote(params: IFetchNoteParams) {
 export async function createNote(params: ICreateNoteParams) {
     try {
         const response = await http.post<ICreateNoteSuccess>(NOTE_CREATE, params)
+        return { response: response.data.data }
+    } catch (err: unknown) {
+        if (isAxiosError(err) && err.response) {
+            const errData = err.response.data as ICreateNoteError
+            return { error: errData.errors }
+        }
+        throw err
+    }
+}
+
+export async function updateNote(params: IUpdateNoteParams) {
+    try {
+        const response = await http.patch<ICreateNoteSuccess>(NOTE_CREATE, params)
         return { response: response.data.data }
     } catch (err: unknown) {
         if (isAxiosError(err) && err.response) {

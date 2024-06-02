@@ -2,9 +2,10 @@ import type { INote } from "../types"
 import { IBaseServerError } from "@/shared/types/Http"
 
 export interface ICreateNoteParams {
+    slug: string
     title: string
     content: string
-    categoryId: number
+    categoryId?: number
 }
 
 export interface ICreateNoteSuccess {
@@ -23,20 +24,29 @@ export interface ICreateNoteError extends IBaseServerError {
 
 export interface IFetchAllNotesParams {
     page: number
+    category: string
 }
 
 export interface IFetchAllNotesSuccess {
     data: INote[]
     meta: {
         page: number
-        total: number
+        totalPages: number
+        totalItems: number
+        pageSize: number
     }
 }
 
 /* Fetch single note */
 
 export interface IFetchNoteParams {
-    id: number
+    slug: string
+}
+
+export interface IUpdateNoteParams {
+    slug: string
+    title: string
+    content: string
 }
 
 export interface IFetchNoteSuccess {

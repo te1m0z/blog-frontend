@@ -1,26 +1,24 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Button, InputText, Tabs } from "@/shared";
 import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 import { NoteContext } from "@/app/contexts/note";
-import * as S from "./styles";
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm, FieldValues, Controller } from "react-hook-form";
 import { withAuth } from "@/shared/ui/PrivateRoute";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import cn from "classnames";
 
 function AdminPage() {
     const notesStore = useContext(NoteContext);
 
-    const [note, setNote] = useState({
-        title: "",
-        content: "",
-        categoryId: 1,
+    const navigate = useNavigate();
+
+    const { register, handleSubmit, formState, control } = useForm({
+        mode: "onTouched",
+        reValidateMode: "onSubmit",
     });
-
-    const { register, handleSubmit, formState, watch } = useForm();
-
-    const noteTitleField = register("noteTitle", { required: "required!!" });
-    const noteTitleValue = watch("noteTitle", "");
 
     const modules = {
         toolbar: [
@@ -31,53 +29,63 @@ function AdminPage() {
         ],
     };
 
-    function onInputNoteContent(value: string) {
-        setNote((state) => ({ ...state, content: value }));
-    }
-
-    async function createNoteHandler({ noteTitle }: FieldValues) {
+    async function createNoteHandler({ slug, title, content }: FieldValues) {
         const isNoteCreated = await notesStore.createNote({
-            title: noteTitle,
-            content: note.content,
-            categoryId: note.categoryId,
+            slug,
+            title,
+            content,
         });
 
-        console.log(isNoteCreated)
+        console.log(isNoteCreated);
+
+        if (isNoteCreated) {
+            navigate("/notes/" + slug);
+        }
     }
 
-    const tabItems = [
-        { label: 'Notes', value: 'notes' },
-        { label: 'Portfolio', value: 'portfolio' }
-    ]
-
     return (
-        <S.AdminPageSections>
-            <Tabs items={tabItems} />
-            <S.AdminPageSectionsItem>
-                <div>Create new note</div>
-                <form onSubmit={handleSubmit(createNoteHandler)}>
-                    <InputText
-                        label={"Title"}
-                        name={noteTitleField.name}
-                        value={noteTitleValue}
-                        onChange={noteTitleField.onChange}
-                        onBlur={noteTitleField.onBlur}
-                        inputRef={noteTitleField.ref}
-                        error={!!formState.errors.noteTitle}
-                        errorText={
-                            formState.errors.noteTitle?.message as string
-                        }
-                    />
-                    <ReactQuill
-                        theme="snow"
-                        value={note.content}
-                        onChange={onInputNoteContent}
-                        modules={modules}
-                    />
-                    <Button type="submit">Create</Button>
-                </form>
-            </S.AdminPageSectionsItem>
-        </S.AdminPageSections>
+        <Form onSubmit={handleSubmit(createNoteHandler)}>
+            <Form.Group className="mb-3" controlId="createNoteSlug">
+                <Form.Label>Slug</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter slug"
+                    {...register("slug", { required: true })}
+                    className={cn({ "is-invalid": formState.errors.slug })}
+                />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="createNoteTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Title"
+                    {...register("title", { required: true })}
+                    className={cn({ "is-invalid": formState.errors.title })}
+                />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="createNoteContent">
+                <Form.Label>Content</Form.Label>
+                <Controller
+                    name="content"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                        <ReactQuill
+                            theme="snow"
+                            value={field.value}
+                            onChange={field.onChange}
+                            ref={field.ref}
+                            modules={modules}
+                        />
+                    )}
+                />
+            </Form.Group>
+
+            <Button type="submit">Create</Button>
+        </Form>
     );
 }
 

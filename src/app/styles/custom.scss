@@ -1,0 +1,16 @@
+// $bs-dropdown-link-active-bg: #000;
+
+@import "bootstrap/scss/bootstrap";
+
+html {
+    margin: 0 0 0 calc(100vw - 100%);
+}
+
+.dropdown-item.active {
+    color: var(--bs-dropdown-link-color);
+    background-color: transparent;
+}
+
+.ql-editor {
+    font-size: 22px;
+}

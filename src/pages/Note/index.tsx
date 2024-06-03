@@ -127,7 +127,7 @@ function Component() {
                                         <Form.Control
                                             type="text"
                                             value={noteEdited.title}
-                                            onInput={(e) =>
+                                            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                                                 setNoteEdited((prev) => ({
                                                     ...prev,
                                                     title: e.target.value,

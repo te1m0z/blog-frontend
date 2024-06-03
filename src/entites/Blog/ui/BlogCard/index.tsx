@@ -7,7 +7,7 @@ interface IProps {
     preview?: string
 }
 
-export default function BlogCard({ title, content }: IProps) {
+export default function BlogCard({ title }: IProps) {
     return (
         <S.BlogCard>
             <S.Title>{title}</S.Title>

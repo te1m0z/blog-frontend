@@ -3,7 +3,7 @@ import { Icon, I18N } from "@/shared";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/Tooltip";
 import * as S from "./styles";
 import cn from "classnames";
-import { TAppLocale } from "@/entites/locale";
+import { TAppLocale } from "@/entites/Locale/types/Locale";
 import { useNavigate } from "react-router-dom";
 
 export function LocaleToggler() {

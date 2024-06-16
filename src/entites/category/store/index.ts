@@ -1,6 +1,7 @@
-import * as api from './api'
-import { ICategory } from '../types'
 import { makeObservable, observable } from 'mobx'
+import * as api from './api'
+import type { ICategory } from '../types'
+import type { ICreateCategoryParams } from './types'
 
 type TCategoryPrivateFields = '_allCategories'
 
@@ -26,10 +27,23 @@ export class Category {
         return categories
     }
 
+    async fetchTop() {
+        const { categories } = await api.fetchTop()
+
+        this._allCategories = categories
+
+        return categories
+    }
+
     async fetchBySlug(payload: string) {
         const response = await api.fetchBySlug(payload)
 
         return response
+    }
+
+    async create(params: ICreateCategoryParams) {
+
+        return await api.create(params)
     }
 }
   

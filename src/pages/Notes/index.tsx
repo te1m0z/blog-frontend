@@ -43,7 +43,7 @@ export function NotesPage() {
         }
 
         async function fetchCategories() {
-            const response = await categoryStore.fetchBySlug(category);
+            const response = await categoryStore.fetchBySlug(category || 'all');
 
             if (response.categories) {
                 setCategories(response.categories);

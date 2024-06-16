@@ -11,3 +11,11 @@ export interface IFetchSingleParams {
 }
 
 export type IFetchSingleSuccess = ICategory[]
+
+export interface ICreateCategoryParams {
+    name: string
+    slug: string
+    parentId: number | null 
+}
+
+export type ICreateCategorySuccess = ICategory

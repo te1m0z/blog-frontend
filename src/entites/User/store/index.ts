@@ -96,8 +96,9 @@ export class User {
     async fetchCsrfToken() {
         const { response } = await api.fetchCsrfToken()
 
+        console.log(response)
         if (response) {
-            return response.token
+            return response
         }
     }
 }

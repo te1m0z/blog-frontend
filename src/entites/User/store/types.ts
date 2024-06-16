@@ -1,5 +1,4 @@
 import type { IUser } from "../types/User"
-import type { ICsrfToken } from "../types/Csrf"
 import { IBaseServerError, IBaseServerSuccess } from "@/shared/types/Http"
 
 type TUserData = {
@@ -31,4 +30,4 @@ export interface IUserLoginError extends IBaseServerError {
     }
 }
 
-export interface IFetchCsrfTokenApiSuccess extends IBaseServerSuccess<ICsrfToken> {}
+export interface IFetchCsrfTokenApiSuccess extends IBaseServerSuccess<string> {}

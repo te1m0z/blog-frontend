@@ -14,7 +14,7 @@ export function AppHeader() {
 
     useEffect(() => {
         async function fetchCategories() {
-            const response = await categoryStore.fetchAll();
+            const response = await categoryStore.fetchTop();
 
             setCategories(response);
         }

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
-import { THEME } from '@/shared'
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { THEME } from '@/shared';
 
 export const Header = styled.header`
   position: sticky;
@@ -10,7 +10,7 @@ export const Header = styled.header`
   z-index: 100;
   /* background-color: ${THEME.BG_COLOR}; */
   transition: background-color 300ms ease;
-`
+`;
 
 export const Inner = styled(motion.div)`
   display: flex;
@@ -21,11 +21,11 @@ export const Inner = styled(motion.div)`
   /* @media ${THEME.DEVICES.md} {
     height: 50px;
   } */
-`
+`;
 
 export const LogoBlock = styled.div`
   font-size: ${THEME.FONT_SIZES.large};
-`
+`;
 
 export const MenuBlock = styled.nav`
   font-family: ${THEME.FONT_FAMILIES.poppins};
@@ -54,16 +54,16 @@ export const MenuBlock = styled.nav`
       transition: width 300ms ease;
     }
   }
-`
+`;
 
 export const ThemeBlock = styled.div`
   display: flex;
   align-items: center;
   height: 20px;
-`
+`;
 
 export const RightBlock = styled.div`
   display: flex;
   align-items: center;
   column-gap: 40px;
-`
+`;
